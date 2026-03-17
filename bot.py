@@ -25,10 +25,16 @@ async def on_message(message):
 
     if bot.user in message.mentions:
 
-        user_message = message.content.replace(f"<@{bot.user.id}>", "").strip()
-        reply = response.choices[0].message.content
+        msg = message.content.lower()
 
-        await message.channel.send(reply)
+        if "help" in msg:
+            await message.channel.send("🛡 Available commands: !kick !ban !warn !warnings")
+
+        elif "rules" in msg:
+            await message.channel.send("📜 Please follow server rules and respect others.")
+
+        else:
+            await message.channel.send("🤖 I'm a moderation bot. Use !help for commands.")
 
     await bot.process_commands(message)
 
